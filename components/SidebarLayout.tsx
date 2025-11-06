@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, Annoyed } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, Annoyed, IdCard } from "lucide-react"
 
 import {
   Sidebar,
@@ -19,32 +19,32 @@ const items = [
     icon: Home,
   },
   {
-    title: "Business Card(表示可)",
+    title: "Business Card",
     url: "/business-card",
-    icon: Home,
+    icon: IdCard,
   },
   {
-    title: "Inbox",
+    title: "Inbox(ハリボテ)",
     url: "#",
     icon: Inbox,
   },
   {
-    title: "Calendar",
+    title: "Calendar(ハリボテ)",
     url: "#",
     icon: Calendar,
   },
   {
-    title: "Search",
+    title: "Search(ハリボテ)",
     url: "#",
     icon: Search,
   },
   {
-    title: "Settings",
+    title: "Settings(ハリボテ)",
     url: "#",
     icon: Settings,
   },
   {
-    title: "雰囲気だけなのでどこにも飛べません。",
+    title: "雰囲気だけなのでほとんど飛べません。",
     url: "#",
     icon: Annoyed
   },

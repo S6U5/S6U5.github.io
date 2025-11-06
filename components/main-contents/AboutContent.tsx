@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import BusinessCard from "@/components/business-card/base";
-
-
+import { useEffect, useState } from "react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import BusinessCard from "@/components/business-card/base"
+import CopyButton from "@/components/ui/CopyButton";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { SiQiita, SiWantedly } from "react-icons/si";
 import Circle from "@/components/CircleIcon";
 
-
-
-
-export default function MyCardPage() {
+export default function AboutContent() {
+  const [content, setContent] = useState("")
   const links = [
     { href: "https://github.com/S6U5", icon: <Github size={28} />, bg: "bg-gray-900 text-white" },
     { href: "https://x.com/EngiAspirantX", icon: <Twitter size={26} />, bg: "bg-sky-500 text-white" },
@@ -19,20 +19,24 @@ export default function MyCardPage() {
     { href: "https://www.wantedly.com/id/shingo_urano", icon: <SiWantedly size={26} />, bg: "bg-[#00A4BB] text-white" },
   ];
 
+  useEffect(() => {
+    // ✅ public/contents/about.md を読み込む
+    fetch("/contents/about-me.md")
+      .then((res) => res.text())
+      .then(setContent)
+      .catch((err) => console.error("Markdown読み込み失敗:", err))
+  }, [])
+
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-sky-50 p-6">
-      {/* ✅ 名刺カード */}
+    <>
       <BusinessCard
         name="Shingo Urano"
         title="SOC Analyst / Developer"
         company="PFU (A RICOH Company)"
         description="Analyzing cyber threats and incidents to protect corporate information assets."
         image="/images/my-icon-bear.png"
-        // email="shingo@example.com"
         website="https://shingolab.com"
       />
-
-      {/* ✅ カード下に改行（margin-topで余白） */}
       <div className="mt-8 flex flex-wrap gap-5 justify-center">
         {links.map((link) => (
           <Circle
@@ -46,6 +50,21 @@ export default function MyCardPage() {
           </Circle>
         ))}
       </div>
-    </main>
-  );
+      <div className="relative">
+        {/* 右上のコピー */}
+        <CopyButton
+          text={content}
+          label="Copy MD"
+          className="absolute right-3 top-3"
+        />
+
+        {/* 表示はHTML（prose） */}
+        <div className="p-6 bg-white rounded-xl shadow-md border border-gray-200 mt-4 prose max-w-none">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {content}
+          </ReactMarkdown>
+        </div>
+      </div>
+    </>
+  )
 }

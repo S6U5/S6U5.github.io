@@ -116,7 +116,252 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+/* ここからカスタムCSS */
+/* By GPT君 */
+
+/* ============================== */
+/* Markdown用カスタムスタイル     */
+/* ============================== */
+
+/* ---- 見出し ---- */
+.prose h1 {
+  color: #1e3a8a;
+  /* blue-900 */
+  border-bottom: 3px solid #93c5fd;
+  /* blue-300 */
+  padding-bottom: 0.3em;
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* --- H2 --- */
+.prose h2 {
+  position: relative;
+  color: #2563eb;
+  /* blue-600 */
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding-left: 0.75em;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+.prose h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 5px;
+  height: 1.2em;
+  background: linear-gradient(to bottom, #93c5fd, #2563eb);
+  border-radius: 2px;
+}
+
+/* --- H3 --- */
+.prose h3 {
+  color: #1d4ed8;
+  /* blue-700 */
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  border-left: 3px solid #60a5fa;
+  /* blue-400 */
+  padding-left: 0.6em;
+}
+
+/* --- H4 --- */
+.prose h4 {
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
+  position: relative;
+  padding-left: 1.4em;
+}
+
+.prose h4::before {
+  content: "◆";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+  /* blue-400 */
+  font-size: 0.9rem;
+  line-height: 1.4em;
+}
+
+/* --- H5 --- */
+.prose h5 {
+  color: #3b82f6;
+  /* blue-500 */
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 0.8em;
+  margin-bottom: 0.3em;
+  position: relative;
+  padding-left: 1.2em;
+}
+
+.prose h5::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+  /* light blue */
+  font-size: 0.8rem;
+  line-height: 1.3em;
+}
+
+/* --- H6 --- */
+.prose h6 {
+  color: #60a5fa;
+  /* blue-400 */
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-left: 2px dashed #93c5fd;
+  /* blue-300 */
+  padding-left: 0.6em;
+}
+
+/* ---- 通常のリスト ---- */
+.prose ul {
+  list-style: none;
+  padding-left: 1.4em;
+  margin-top: 0.8em;
+  margin-bottom: 1em;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 1.4em;
+  margin-bottom: 0.4em;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* ● 第1階層（青） */
+.prose ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #3b82f6;
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* ● 第2階層（薄青） */
+.prose ul ul {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  padding-left: 1.4em;
+}
+
+.prose ul ul li::before {
+  content: "–";
+  color: #60a5fa;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+/* ● 第3階層（灰色ドット） */
+.prose ul ul ul li::before {
+  content: "•";
+  color: #94a3b8;
+  /* slate-400 */
+  font-size: 1em;
+}
+
+/* ---- 番号付きリスト ---- */
+.prose ol {
+  counter-reset: item;
+  padding-left: 1.4em;
+  margin-top: 0.8em;
+  margin-bottom: 1em;
+}
+
+.prose ol li {
+  counter-increment: item;
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.4em;
+  color: #374151;
+  line-height: 1.7;
+}
+
+/* 第1階層の番号（青） */
+.prose ol li::before {
+  content: counter(item) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* 第2階層はa,b,c... */
+.prose ol ol {
+  counter-reset: subitem;
+}
+
+.prose ol ol li {
+  counter-increment: subitem;
+}
+
+.prose ol ol li::before {
+  content: counter(subitem, lower-alpha) ")";
+  color: #60a5fa;
+  font-weight: 500;
+}
+
+/* 第3階層は i, ii, iii... */
+.prose ol ol ol {
+  counter-reset: subsubitem;
+}
+
+.prose ol ol ol li {
+  counter-increment: subsubitem;
+}
+
+.prose ol ol ol li::before {
+  content: counter(subsubitem, lower-roman) ")";
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* ---- 段落など ---- */
+.prose p {
+  color: #374151;
+  line-height: 1.8;
+  margin-bottom: 0.9em;
+}
+
+.prose strong {
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.prose a {
+  color: #2563eb;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #1e3a8a;
 }
