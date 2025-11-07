@@ -31,7 +31,7 @@ export default function AboutContent() {
     <>
       <BusinessCard
         name="Shingo Urano"
-        title="SOC Analyst / Developer"
+        title="SOC Analyst / SE"
         company="PFU (A RICOH Company)"
         description="Analyzing cyber threats and incidents to protect corporate information assets."
         image="/images/my-icon-bear.png"

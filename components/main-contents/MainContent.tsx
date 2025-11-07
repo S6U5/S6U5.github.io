@@ -1,11 +1,48 @@
-export default function MainContent() {
+import Image from "next/image";
+
+export default function Page() {
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md border border-gray-200">
-      <h1 className="text-2xl font-bold mb-4">Main Page</h1>
-      <p>
-        こちらはメインのページです。
-        プロジェクトや最新の活動内容などをここに掲載します。
-      </p>
+    <div className="flex flex-wrap gap-4">
+      <div className="relative w-[300px] aspect-square">
+        <Image
+          src="/images/JK_Adventure_title.png"
+          alt="A"
+          fill
+          className="object-cover rounded-xl"
+          sizes="300px"
+          priority
+        />
+      </div>
+      <div className="relative w-[300px] aspect-square">
+        <Image
+          src="/images/JK_Adventure_title.png"
+          alt="B"
+          fill
+          className="object-cover rounded-xl"
+          sizes="300px"
+          priority
+        />
+      </div>
+      <div className="relative w-[300px] aspect-square">
+        <Image
+          src="/images/JK_Adventure_title.png"
+          alt="B"
+          fill
+          className="object-cover rounded-xl"
+          sizes="300px"
+          priority
+        />
+      </div>
+      <div className="relative w-[300px] aspect-square">
+        <Image
+          src="/images/JK_Adventure_title.png"
+          alt="B"
+          fill
+          className="object-cover rounded-xl"
+          sizes="300px"
+          priority
+        />
+      </div>
     </div>
-  )
+  );
 }
