@@ -9,9 +9,16 @@ profile:
   name: 浦野真吾
 
 entries:
+  - title: [株式会社PFU, ネットワークセキュリティ部, SOCアナリスト]
+    cardType: normal
+    img: "/images/pfu.png"
+    period: { start: "2025-04-01", end: "" }
+    description: |
+      SOCアナリストとして、インシデント対応を行いました。
+
   - title: [玉川大学, 工学部 エンジニアリングデザイン学科]
     cardType: normal
-    img: ""
+    img: "/images/tamagawa.jpg"
     period: { start: "2021-04-01", end: "2025-03-31" }
     description: |
       ものづくりを専攻
