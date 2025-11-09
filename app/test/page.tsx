@@ -6,7 +6,8 @@ import Card from '@/components/history-card/Card';
 export default function TestPage() {
   return (
     <>
-      <Card />
+      テスト用のページです。
+      見つからないことを祈って。。。
     </>
   );
 }
