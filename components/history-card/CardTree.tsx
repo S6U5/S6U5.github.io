@@ -44,7 +44,7 @@ const pickLatestIndex = (nodes: CareerNode[]) => {
 };
 
 /* ========= 単一ノード（子の折りたたみ付き） ========= */
-/** Card に children は渡さない。Card の「下」にツリー線と子カードを描画して視覚的にネスト */
+/** Card に children は渡さず、見た目としてネスト表示にする */
 const TreeItem = memo(function TreeItem({
   node,
   depth = 0,
@@ -52,27 +52,25 @@ const TreeItem = memo(function TreeItem({
   node: CareerNode;
   depth?: number;
 }) {
-  const [open, setOpen] = useState<boolean>(depth === 0); // ルートは開いた状態に
+  const [open, setOpen] = useState<boolean>(depth === 0); // ルートは開いた状態
   const borderless = node.cardType === "noBorder";
-  const hasChildren = !!(node.children && node.children.length);
+  const childCount = node.children?.length ?? 0;
+  const hasChildren = childCount > 0;
 
   return (
     <div className="relative">
-      {/* 親があるときの縦ガイド線（Card全体の左側に表示） */}
+      {/* 親があるときの縦ガイド線 */}
       {depth > 0 && (
         <div className="absolute -left-3 top-0 h-full border-l border-gray-200 pointer-events-none" />
       )}
 
-      {/* エルボー（└）風の横線を Card の左に差し込む */}
+      {/* エルボー線（└） */}
       <div className={depth > 0 ? "pl-6 relative" : "relative"}>
         {depth > 0 && (
-          <div
-            className="absolute left-0 top-8 -ml-6 w-6 border-t border-gray-200"
-            aria-hidden
-          />
+          <div className="absolute left-0 top-8 -ml-6 w-6 border-t border-gray-200" aria-hidden />
         )}
 
-        {/* 本体カード（子要素は渡さない） */}
+        {/* 本体カード（単体表示） */}
         <Card
           titleList={node.title}
           img={node.img || ""}
@@ -86,7 +84,7 @@ const TreeItem = memo(function TreeItem({
           className=""
         />
 
-        {/* 子ノードトグルと子の表示（Cardの“外側”で階層を表現） */}
+        {/* 子ノード（Cardの外側でネスト表現） */}
         {hasChildren && (
           <div className="mt-2 pl-6">
             <button
@@ -94,12 +92,12 @@ const TreeItem = memo(function TreeItem({
               onClick={() => setOpen((v) => !v)}
               className="text-xs px-2 py-1 rounded-md border border-gray-300 hover:bg-gray-50"
             >
-              {open ? "詳細を閉じる" : `詳細を開く（${node.children!.length}）`}
+              {open ? "詳細を閉じる" : `詳細を開く（${childCount}）`}
             </button>
 
             {open && (
               <div className="mt-3 flex flex-col gap-3">
-                {node.children!.map((child, idx) => (
+                {(node.children ?? []).map((child, idx) => (
                   <TreeItem key={idx} node={child} depth={depth + 1} />
                 ))}
               </div>
@@ -112,11 +110,7 @@ const TreeItem = memo(function TreeItem({
 });
 
 /* ========= YAML 読み込み → 表示（完全フロントエンド） ========= */
-export default function CardTree({
-  src = "/data/history.yml",
-}: {
-  src?: string;
-}) {
+export default function CardTree({ src = "/data/history.yml" }: { src?: string }) {
   const [data, setData] = useState<CareerYaml | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -133,8 +127,10 @@ export default function CardTree({
           throw new Error("Invalid YAML: entries not found");
         }
         setData(parsed);
-      } catch (e: any) {
-        setErr(e?.message ?? "failed to load yaml");
+      } catch (e: unknown) {
+        const message =
+          e instanceof Error ? e.message : typeof e === "string" ? e : "failed to load yaml";
+        setErr(message);
       } finally {
         setLoading(false);
       }
@@ -142,10 +138,7 @@ export default function CardTree({
   }, [src]);
 
   const entries = useMemo<CareerNode[]>(() => data?.entries ?? [], [data]);
-  const latestIdx = useMemo(
-    () => (entries.length ? pickLatestIndex(entries) : 0),
-    [entries]
-  );
+  const latestIdx = useMemo(() => (entries.length ? pickLatestIndex(entries) : 0), [entries]);
 
   const [showLatestOnly, setShowLatestOnly] = useState(true);
   const list = useMemo(
