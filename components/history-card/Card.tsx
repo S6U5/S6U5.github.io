@@ -2,7 +2,7 @@ import PhotoIcon from "./PhotoIcon";
 import CommonContainer from "../CommonContainer";
 
 /** 画像タイプの候補（必要に応じて増やしてOK） */
-export type ImgType = "circle" | "rounded" | "square";
+export type ImgType = "circle" | "roundedRect" | "square";
 
 /** カードの受け取りProps */
 export interface CardProps {
