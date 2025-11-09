@@ -1,7 +1,8 @@
+// components/history-card/Card.tsx
 import PhotoIcon from "./PhotoIcon";
 import CommonContainer from "../CommonContainer";
 
-/** 画像タイプの候補（必要に応じて増やしてOK） */
+/** 画像タイプの候補（PhotoIcon.type と一致させる） */
 export type ImgType = "circle" | "roundedRect" | "square";
 
 /** カードの受け取りProps */
@@ -29,6 +30,9 @@ export interface CardProps {
 
   /** ラッパに追加したいクラス（任意） */
   className?: string;
+
+  /** 枠線/影を消したい場合（任意）— CardTree から制御 */
+  borderless?: boolean;
 }
 
 /** 日付整形ユーティリティ */
@@ -52,6 +56,7 @@ export default function Card({
   periodEnd,
   dateMode = "ymd",
   className = "",
+  borderless = false,
 }: CardProps) {
   // 期間ラベル生成
   const startD = periodStart ? new Date(periodStart) : undefined;
@@ -71,8 +76,8 @@ export default function Card({
         : "";
 
   return (
-    <CommonContainer>
-      <div className={`flex items-start gap-4 ${className}`}>
+    <CommonContainer borderless={borderless} className={className}>
+      <div className="flex items-start gap-4">
         <PhotoIcon
           src={img}
           alt={titleList[0]}
