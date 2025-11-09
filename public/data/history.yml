@@ -1,0 +1,30 @@
+# 経歴カードを作成したい
+# まずトグルで最新の経歴を表示する
+# クリックすると全体が展開
+# さらに、ネスト形式で詳しい内容を展開することができる
+# 必要な項目は以下
+# 所属組織・所属・所属期間・
+
+profile:
+  name: 浦野真吾
+
+entries:
+  - title: [玉川大学, 工学部 エンジニアリングデザイン学科]
+    cardType: normal
+    img: ""
+    period: { start: "2021-04-01", end: "2025-03-31" }
+    description: |
+      ものづくりを専攻
+      3Dプリンタやマイコンを用いたデバイス制作を行いました。
+    children:
+      - title: [インタラクションデザイン研究室]
+        img: ""
+        cardType: normal
+        period: { start: "2023-08-01", end: "2025-03-31" }
+        description: |
+          インタラクションデザインを専攻しました。
+          卒業研究ではユーザの感情を反映し内省を促す
+          Neririというエージェントを作成しました。
+        children:
+          - title: [Machida WEEKEND STREET]
+            cardType: noBorder

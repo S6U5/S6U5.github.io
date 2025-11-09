@@ -19,8 +19,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My App",
-  description: "Global Sidebar Example",
+  title: "S6U5のポートフォリオサイト",
+  description: "S6U5の自己紹介や作品集についてのサイトです。NextjsをGitHub Pagesで静的サイトとして作成しています。",
+  themeColor: "#0ea5e9",
+
 };
 
 export default function RootLayout({
