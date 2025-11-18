@@ -36,6 +36,7 @@ export default function AboutContent() {
         description="Analyzing cyber threats and incidents to protect corporate information assets."
         image="/images/my-icon-bear.png"
         website="https://shingolab.com"
+        email="contact@shingolab.com"
       />
       <div className="mt-8 flex flex-wrap gap-5 justify-center">
         {links.map((link) => (
