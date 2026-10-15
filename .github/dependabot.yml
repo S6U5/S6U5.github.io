@@ -1,0 +1,13 @@
+# GitHub Actions の SHA 固定を、行末の版コメントごと更新する PR にする。
+# 出たばかりの版は掴まない(公開から7日置く)。
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
