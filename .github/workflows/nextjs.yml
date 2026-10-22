@@ -58,7 +58,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "20"
+          # Node 20 は 2026-04 にサポートが終わり、セキュリティ修正が出ない。24 にし、ランナーにある古い版でなく最新を使う
+          node-version: "24"
+          check-latest: true
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
